@@ -1,0 +1,41 @@
+//
+//  VermelhoCoordinator.swift
+//  Exercicio
+//
+//  Created by Leandro Ouriques on 06/07/23.
+//
+
+import Foundation
+import UIKit
+class VermelhoCoordinator: Coordinator {
+    var navigationController: UINavigationController
+    
+    //cria um construtor para incializar meu navationCrontroller
+    init (navigationController: UINavigationController ) {
+            self.navigationController = navigationController
+     
+        }
+
+      func start() {
+          let viewController = VermelhoViewController()
+            self.navigationController.pushViewController(viewController, animated: true)
+            viewController.onAzulTap = {
+              self.gotoAzul()
+          }
+          
+          viewController.onVerdeTap = {
+              self.gotoVerde()
+          }
+          
+          }
+    func gotoAzul() {
+        let coordinator = AzulCoordinator(navigationController: navigationController)
+        coordinator.start()
+    }
+    
+    func gotoVerde() {
+        let coordinator = VerdeCoordinator(navigationController: navigationController)
+        coordinator.start()
+    }
+    
+}
